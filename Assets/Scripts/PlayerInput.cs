@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(PlayerAbilities))]
 [RequireComponent(typeof(PlayerMovement))]
 public class PlayerInput : MonoBehaviour 
 {
@@ -37,10 +36,12 @@ public class PlayerInput : MonoBehaviour
             _movement.MoveRight();
         }
         //ABILITY 1
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKey(KeyCode.Z))
         {
-            
-        } 
+            _abilities.ActivateSpeedBuff();
+        }
+        else
+            _abilities.DeactivateSpeedBuff();
         //ABILITY 2
         if (Input.GetKeyDown(KeyCode.X))
         {

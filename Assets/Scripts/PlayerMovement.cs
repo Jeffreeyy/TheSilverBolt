@@ -4,10 +4,18 @@ using System.Collections;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour 
 {
-<<<<<<< HEAD
-    public float _movementSpeed;
-=======
-    [SerializeField]private float _movementSpeed;
+    private float _movementSpeed = 1;
+    public float MovementSpeed
+    {
+        get
+        {
+            return _movementSpeed;
+        }
+        set
+        {
+            _movementSpeed = value;
+        }
+    }
     private CharacterController _cc;
     [SerializeField]private float _jumpSpeed;
     [SerializeField]private float _gravity;
@@ -22,7 +30,6 @@ public class PlayerMovement : MonoBehaviour
     {
         Move();
     }
->>>>>>> origin/master
 
     public void JumpUp()
     {

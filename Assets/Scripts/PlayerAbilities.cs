@@ -5,25 +5,22 @@ using System.Collections;
 public class PlayerAbilities : MonoBehaviour {
 
     private PlayerMovement _movement;
-    [SerializeField]private float enhancedMoveSpeed;
+    [SerializeField]private float _normalMoveSpeed;
+    [SerializeField]private float _enhancedMoveSpeed;
 
     void Start()
     {
         _movement = GetComponent<PlayerMovement>();
-    }
-
-    void Update()
-    {
-
+        _normalMoveSpeed = _movement.MovementSpeed;
     }
 
     public void ActivateSpeedBuff()
     {
-        _movement._movementSpeed = enhancedMoveSpeed;
+        _movement.MovementSpeed = _enhancedMoveSpeed;
     }
 
     public void DeactivateSpeedBuff()
     {
-
+        _movement.MovementSpeed = _normalMoveSpeed;
     }
 }
