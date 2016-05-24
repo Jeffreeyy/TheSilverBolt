@@ -17,12 +17,12 @@ public class PlayerInput : MonoBehaviour
 	void FixedUpdate () 
     {
         //UP
-	    if (Input.GetKey(KeyCode.UpArrow))
+	    if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-
+            _movement.JumpUp();
         }
         //DOWN
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.DownArrow))
         {
 
         }
@@ -37,15 +37,14 @@ public class PlayerInput : MonoBehaviour
             _movement.MoveRight();
         }
         //ABILITY 1
-        if (Input.GetKey(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
             
         } 
         //ABILITY 2
-        if (Input.GetKey(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.X))
         {
 
         }
-
 	}
 }
