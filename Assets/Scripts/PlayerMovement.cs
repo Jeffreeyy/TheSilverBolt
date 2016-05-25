@@ -47,11 +47,13 @@ public class PlayerMovement : MonoBehaviour
     public void MoveLeft()
     {
         _cc.Move(Vector2.left * _movementSpeed * Time.fixedDeltaTime);
+        transform.eulerAngles = new Vector2(0, 180);
     }
 
     public void MoveRight()
     {
         _cc.Move(Vector2.right * _movementSpeed * Time.fixedDeltaTime);
+        transform.eulerAngles = new Vector2(0, 0);
     }
 
     private void Move()
