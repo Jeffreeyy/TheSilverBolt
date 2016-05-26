@@ -13,7 +13,7 @@ public class PlayerInput : MonoBehaviour
         _abilities = GetComponent<PlayerAbilities>();
     }
 
-	void FixedUpdate () 
+	void Update () 
     {
         //UP
 	    if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -45,7 +45,7 @@ public class PlayerInput : MonoBehaviour
         //ABILITY 2
         if (Input.GetKeyDown(KeyCode.X))
         {
-
+            _abilities.Punch();
         }
 	}
 }

@@ -8,6 +8,7 @@ public class PlayerAbilities : MonoBehaviour {
     [SerializeField]private float _normalMoveSpeed;
     [SerializeField]private float _enhancedMoveSpeed;
     private ParticleSystem[] _particleSystem;
+    [SerializeField]private float _castRange;
 
     void Start()
     {
@@ -35,5 +36,19 @@ public class PlayerAbilities : MonoBehaviour {
     {
         EmitParticles(false);
         _movement.MovementSpeed = _normalMoveSpeed;
+    }
+
+    public void Punch()
+    {
+        Ray ray = new Ray(transform.position, transform.TransformDirection(Vector2.right));
+        RaycastHit hit = new RaycastHit();
+        if(Physics.Raycast(ray, out hit, _castRange))
+        {
+            if(hit.transform.tag == "Enemy")
+            {
+                hit.collider.SendMessageUpwards("TakeDamage", 10f);
+            }
+        }
+        Debug.DrawRay(transform.position, transform.TransformDirection(new Vector2(_castRange, 0)), Color.yellow, 0.4f);
     }
 }
