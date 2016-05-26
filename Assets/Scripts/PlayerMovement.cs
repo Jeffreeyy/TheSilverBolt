@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void JumpUp()
     {
-        if(_cc.isGrounded)
+        if (_cc.isGrounded)
         {
             _jumpDirection.y = _jumpSpeed;
         }
