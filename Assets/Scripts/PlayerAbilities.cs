@@ -36,7 +36,6 @@ public class PlayerAbilities : MonoBehaviour {
             EmitParticles(true);
             _movement.MovementSpeed = _enhancedMoveSpeed;
             StartCoroutine(_playerPower.PowerDrain());
-            
         }
     }
 
@@ -47,7 +46,6 @@ public class PlayerAbilities : MonoBehaviour {
         _movement.MovementSpeed = _normalMoveSpeed;
     }
 
-<<<<<<< HEAD
     public void Punch()
     {
         Ray ray = new Ray(transform.position, transform.TransformDirection(Vector2.right));
@@ -62,7 +60,3 @@ public class PlayerAbilities : MonoBehaviour {
         Debug.DrawRay(transform.position, transform.TransformDirection(new Vector2(_castRange, 0)), Color.yellow, 0.4f);
     }
 }
-=======
-    
-}
->>>>>>> origin/master
