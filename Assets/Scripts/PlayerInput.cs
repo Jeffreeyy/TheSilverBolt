@@ -6,14 +6,16 @@ public class PlayerInput : MonoBehaviour
 {
     private PlayerMovement _movement;
     private PlayerAbilities _abilities;
+    private PlayerPower _playerPower;
 
     void Awake()
     {
         _movement = GetComponent<PlayerMovement>();
         _abilities = GetComponent<PlayerAbilities>();
+        _playerPower = GetComponent<PlayerPower>();
     }
 
-	void FixedUpdate () 
+	void Update () 
     {
         //UP
 	    if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -45,7 +47,16 @@ public class PlayerInput : MonoBehaviour
         //ABILITY 2
         if (Input.GetKeyDown(KeyCode.X))
         {
+            _abilities.Punch();
+        }
 
+        if(!Input.anyKey && !Input.anyKeyDown)
+        {
+            _playerPower.IsStandingStill = true;
+        }
+        else
+        {
+            _playerPower.IsStandingStill = false;
         }
 	}
 }
