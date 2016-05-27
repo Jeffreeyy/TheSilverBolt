@@ -67,7 +67,13 @@ public class PlayerPower : MonoBehaviour
         while (_isUsingPower)
         {
             yield return new WaitForSeconds(_drainRate);
-            _power -= _drainAmount;
+
+            if (_power > 0)
+            {
+                _power -= _drainAmount;
+            }
+            else
+                _playerAbilities.DeactivateSpeedBuff();
         }
     }
 

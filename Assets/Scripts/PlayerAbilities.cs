@@ -30,7 +30,7 @@ public class PlayerAbilities : MonoBehaviour {
 
     public void ActivateSpeedBuff()
     {
-        if (_playerPower.Power > 0 && !_playerPower.IsUsingPower)
+        if (_playerPower.Power > 2 && !_playerPower.IsUsingPower)
         {
             _playerPower.IsUsingPower = true;
             EmitParticles(true);
