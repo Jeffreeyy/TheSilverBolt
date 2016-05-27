@@ -4,6 +4,9 @@ using System.Collections;
 public class EnemyDetect : MonoBehaviour {
 
     private float _targetingRadius = 2f;
+    [SerializeField]private float enemyY;
+    [SerializeField]private float moveSpeed;
+    private Transform target;
 
 	// Use this for initialization
 	void Start () {
@@ -12,7 +15,21 @@ public class EnemyDetect : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //Collider col = Physics.OverlapSphere(transform.position, _targetingRadius);
+        Collider[] objectsInRange = Physics.OverlapSphere(transform.position, _targetingRadius);
+        foreach(Collider col in objectsInRange)
+        {
+            if(col.name == "Player")
+            {
+                //move to player
+                target = col.transform;
+                float dist = Vector3.Distance(transform.position, target.position);
+                if(dist > 0.3)
+                {
+                    float playerX = target.position.x;
+                    transform.position = Vector3.MoveTowards(transform.position, new Vector3(playerX, enemyY, 0), moveSpeed * Time.deltaTime);
+                }
+            }
+        }
         
     }
 
