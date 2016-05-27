@@ -23,7 +23,7 @@ public class PlayerInput : MonoBehaviour
         //DOWN
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-
+            _movement.Duck = true;
         }
         //LEFT
         if (Input.GetKey(KeyCode.LeftArrow))

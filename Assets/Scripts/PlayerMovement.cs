@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(PlayerCollisionChecker))]
 public class PlayerMovement : MonoBehaviour 
 {
     private float _movementSpeed = 1;
@@ -16,49 +17,49 @@ public class PlayerMovement : MonoBehaviour
             _movementSpeed = value;
         }
     }
-    private CharacterController _cc;
+    [SerializeField]private bool _duck = false;
+    public bool Duck
+    {
+        get
+        {
+            return _duck;
+        }
+        set
+        {
+            _duck = value;
+        }
+    }
+    private Rigidbody _rb;
+    private PlayerCollisionChecker _colChecker;
     [SerializeField]private float _jumpSpeed;
-    [SerializeField]private float _gravity;
-    private Vector2 _jumpDirection;
 
     void Awake()
     {
-        _cc = GetComponent<CharacterController>();
-    }
-
-    void FixedUpdate()
-    {
-        Move();
+        _rb = GetComponent<Rigidbody>();
+        _colChecker = GetComponent<PlayerCollisionChecker>();
     }
 
     public void JumpUp()
     {
-        if (_cc.isGrounded)
+        if (_colChecker.CanJump)
         {
-            _jumpDirection.y = _jumpSpeed;
+            _rb.velocity = new Vector3(0, _jumpSpeed, 0);
         }
-    }
-
-    public void DuckDown()
-    {
-        
     }
 
     public void MoveLeft()
     {
-        _cc.Move(Vector2.left * _movementSpeed * Time.fixedDeltaTime);
-        transform.eulerAngles = new Vector2(0, 180);
+        if(_colChecker.CanMoveLeft())
+        {
+            transform.Translate(Vector2.left * _movementSpeed * Time.deltaTime);
+        }
     }
 
     public void MoveRight()
     {
-        _cc.Move(Vector2.right * _movementSpeed * Time.fixedDeltaTime);
-        transform.eulerAngles = new Vector2(0, 0);
-    }
-
-    private void Move()
-    {
-        _jumpDirection.y -= _gravity * Time.fixedDeltaTime;
-        _cc.Move(_jumpDirection * Time.fixedDeltaTime);
+        if (_colChecker.CanMoveRight())
+        {
+            transform.Translate(Vector2.right * _movementSpeed * Time.deltaTime);
+        }
     }
 }

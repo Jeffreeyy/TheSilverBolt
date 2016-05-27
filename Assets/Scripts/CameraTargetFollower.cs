@@ -20,13 +20,13 @@ public class CameraTargetFollower : MonoBehaviour
         _newPos = new Vector3(_target.position.x - _offset.x, _newYPos, -10f);
         transform.position = Vector3.Lerp(transform.position, _newPos, _damping * Time.deltaTime);
 
-        if(_target.position.y > 0f)
+        if (_target.position.y > _offset.y)
         {
             _newYPos = _target.position.y;
         }
         else
         {
-            _newYPos = 0f;
+            _newYPos = _offset.y;
         }
 	}
 }
