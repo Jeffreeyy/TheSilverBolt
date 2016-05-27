@@ -7,6 +7,8 @@ public class PlayerPower : MonoBehaviour
     private float _drainAmount = 1;
     private float _rechargeRate = .1f;
     private float _rechargeAmount = .2f;
+    private float _doubleRechargeRate;
+    private float _oldRechargeRate;
     private float _maxPower;
     private float _power = 100;
     public float Power
@@ -21,6 +23,18 @@ public class PlayerPower : MonoBehaviour
         }
     }
 
+    private bool _isStandingStill = true;
+    public bool IsStandingStill
+    {
+        get
+        {
+            return _isStandingStill;
+        }
+        set
+        {
+            _isStandingStill = value;
+        }
+    }
     private bool _isUsingPower = false;
     public bool IsUsingPower
     {
@@ -33,6 +47,7 @@ public class PlayerPower : MonoBehaviour
             _isUsingPower = value;
         }
     }
+
     private PlayerAbilities _playerAbilities;
 
     private bool _isRecharging = false;
@@ -42,12 +57,15 @@ public class PlayerPower : MonoBehaviour
     {
         _playerAbilities = GetComponent<PlayerAbilities>();
         _maxPower = _power;
+        _doubleRechargeRate = _rechargeRate/2;
+        _oldRechargeRate = _rechargeRate;
     }
 
     // Update is called once per frame 
     void Update()
     {
         Recharge();
+        FastRecharge();
     }
 
     private void Recharge()
@@ -59,6 +77,18 @@ public class PlayerPower : MonoBehaviour
         else if (_isUsingPower)
         {
             _isRecharging = false;
+        }
+    }
+
+    private void FastRecharge()
+    {
+        if(_isStandingStill)
+        {
+            _rechargeRate = _doubleRechargeRate;
+        }
+        else
+        {
+            _rechargeRate = _oldRechargeRate;
         }
     }
 
